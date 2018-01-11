@@ -2,6 +2,7 @@ package com.stormadvance.logprocessing;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import org.apache.storm.tuple.Tuple;
 /**
@@ -45,22 +46,27 @@ public class MySQLDump {
 	 * @param tuple
 	 */
 	public void persistRecord(Tuple tuple) {
-		try {
+
 
 			// preparedStatements can use variables and are more efficient
 			String query = "INSERT INTO `testing` (`c1`, `c2`, `c3`) VALUES ('c1', 'c2', 'c3')";
-			preparedStatement = connect.prepareStatement(query);
+        try {
+            preparedStatement = connect.prepareStatement(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-			//preparedStatement.setString(1, tuple.getStringByField("c1"));
+        //preparedStatement.setString(1, tuple.getStringByField("c1"));
 			//preparedStatement.setString(2, tuple.getStringByField("c2"));
 			//preparedStatement.setString(3, tuple.getStringByField("c3"));
 
 			
 			// Insert record
-			preparedStatement.executeUpdate();
+        try {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			// close prepared statement
 			if (preparedStatement != null) {
