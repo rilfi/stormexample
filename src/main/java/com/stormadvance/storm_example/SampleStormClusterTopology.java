@@ -17,6 +17,9 @@ public class SampleStormClusterTopology {
 		// set the bolt class
 		builder.setBolt("SampleBolt", new SampleBolt(), 4).shuffleGrouping(
 				"SampleSpout");
+		builder.setBolt("PersistenceBolt",
+				new PersistenceBolt("10.8.106.57","storm","root",""),
+				1).globalGrouping("SampleBolt");
 		Config conf = new Config();
 		conf.setNumWorkers(3);
 		// This statement submit the topology on remote
