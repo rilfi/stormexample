@@ -1,6 +1,7 @@
 package com.stormadvance.logprocessing;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -37,9 +38,19 @@ public class MySQLDump {
 	/**
 	 * Get the MySQL connection
 	 */
-	private Connection connect = MySQLConnection.getMySQLConnection(ip,database,user,password);
+	//private Connection connect = MySQLConnection.getMySQLConnection(ip,database,user,password);
+    Connection con;
 
-	private PreparedStatement preparedStatement = null;
+    {
+        try {
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://10.8.106.58:3306/storm", "root", "root");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private PreparedStatement preparedStatement = null;
 	
 	/**
 	 * Persist input tuple.
@@ -51,7 +62,7 @@ public class MySQLDump {
 			// preparedStatements can use variables and are more efficient
 			String query = "INSERT INTO `testing` (`c1`, `c2`, `c3`) VALUES ('c1', 'c2', 'c3')";
         try {
-            preparedStatement = connect.prepareStatement(query);
+            preparedStatement = con.prepareStatement(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,7 +94,7 @@ public class MySQLDump {
 	
 	public void close() {
 		try {
-		connect.close();
+		con.close();
 		}catch(Exception exception) {
 			System.out.println("Error occure while clossing the connection");
 		}
