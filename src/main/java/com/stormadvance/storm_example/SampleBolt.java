@@ -12,7 +12,7 @@ public class SampleBolt extends BaseBasicBolt {
 
 	public void execute(Tuple input, BasicOutputCollector collector) {
 		// fetched the field "site" from input tuple.
-		String test = input.getStringByField("site");
+		String test = input.getStringByField("c1");
 		collector.emit(new Values(input.getString(0), input.getString(1), System.currentTimeMillis()));
 		// print the value of field "site" on console.
 		//System.out.println("######### Name of input site is : " + test);

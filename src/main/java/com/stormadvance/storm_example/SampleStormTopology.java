@@ -16,6 +16,9 @@ public class SampleStormTopology {
 		// set the bolt class
 		builder.setBolt("SampleBolt", new SampleBolt(), 4).shuffleGrouping(
 				"SampleSpout");
+		builder.setBolt("PersistenceBolt",
+				new PersistenceBolt("10.8.106.57","storm","root",""),
+				1).shuffleGrouping("SampleBolt");
 		Config conf = new Config();
 		conf.setDebug(true);
 		// create an instance of LocalCluster class for
