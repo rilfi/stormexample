@@ -29,7 +29,7 @@ public class MySQLConnection {
         //try {
             // this will load the MySQL driver, each DB has its own driver
         try {
-            Class.forName("org.gjt.mm.mysql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
