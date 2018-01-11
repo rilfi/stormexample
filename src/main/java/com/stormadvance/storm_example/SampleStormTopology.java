@@ -17,7 +17,7 @@ public class SampleStormTopology {
 		builder.setBolt("SampleBolt", new SampleBolt(), 4).shuffleGrouping(
 				"SampleSpout");
 		builder.setBolt("PersistenceBolt",
-				new PersistenceBolt("10.8.106.57","storm","root",""),
+				new PersistenceBolt("10.8.106.58","storm","root",""),
 				1).shuffleGrouping("SampleBolt");
 		Config conf = new Config();
 		conf.setDebug(true);

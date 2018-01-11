@@ -36,7 +36,7 @@ public class SampleSpout extends BaseRichSpout {
 		final Random rand = new Random();
 		// generate the random number from 0 to 4.
 		int randomNumber = rand.nextInt(5);
-		spoutOutputCollector.emit(new Values(map.get(randomNumber),System.currentTimeMillis()));
+		spoutOutputCollector.emit(new Values(map.get(randomNumber),"gvhf"));
 		try{
 		Thread.sleep(5000);
 		}catch(Exception e) {
