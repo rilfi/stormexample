@@ -48,9 +48,8 @@ public class MySQLDump {
 		try {
 
 			// preparedStatements can use variables and are more efficient
-			String query = " insert into storm (c1, c2, c3) values ('c1', 'c2', 'c3')";
-			preparedStatement = connect
-					.prepareStatement(query);
+			String query = "INSERT INTO `testing` (`c1`, `c2`, `c3`) VALUES ('c1', 'c2', 'c3')";
+			preparedStatement = connect.prepareStatement(query);
 
 			//preparedStatement.setString(1, tuple.getStringByField("c1"));
 			//preparedStatement.setString(2, tuple.getStringByField("c2"));
