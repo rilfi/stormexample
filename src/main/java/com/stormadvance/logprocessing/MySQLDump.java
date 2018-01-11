@@ -49,7 +49,7 @@ public class MySQLDump {
 
 			// preparedStatements can use variables and are more efficient
 			preparedStatement = connect
-					.prepareStatement("insert into  testing  values (?,?, ?)");
+					.prepareStatement("insert into  testing  values (?,?,?)");
 
 			preparedStatement.setString(1, tuple.getStringByField("c1"));
 			preparedStatement.setString(2, tuple.getStringByField("c2"));
@@ -60,8 +60,7 @@ public class MySQLDump {
 			preparedStatement.executeUpdate();
 
 		} catch (Exception e) {
-			throw new RuntimeException(
-					"Error occure while persisting records in mysql : ");
+			e.printStackTrace();
 		} finally {
 			// close prepared statement
 			if (preparedStatement != null) {
