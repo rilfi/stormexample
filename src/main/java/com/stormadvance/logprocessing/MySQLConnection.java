@@ -2,6 +2,8 @@ package com.stormadvance.logprocessing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * This class return the MySQL connection.
@@ -24,16 +26,24 @@ public class MySQLConnection {
      * @return MySQL connection
      */
     public static Connection getMySQLConnection(String ip, String database, String user, String password) {
-        try {
+        //try {
             // this will load the MySQL driver, each DB has its own driver
+        try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            // setup the connection with the DB.
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        // setup the connection with the DB.
+        try {
             connect = DriverManager
                     .getConnection("jdbc:mysql://"+ip+"/"+database+"?"
                             + "user="+user+"&password="+password+"");
-            return connect;
-        } catch (Exception e) {
-            throw new RuntimeException("Error occure while get mysql connection : ");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return connect;
+        /*} catch (Exception e) {
+            throw new RuntimeException("Error occure while get mysql connection : ");
+        }*/
     }
 }
