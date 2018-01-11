@@ -26,7 +26,7 @@ public class MySQLConnection {
     public static Connection getMySQLConnection(String ip, String database, String user, String password) {
         try {
             // this will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.gjt.mm.mysql.Driver");
             // setup the connection with the DB.
             connect = DriverManager
                     .getConnection("jdbc:mysql://"+ip+"/"+database+"?"
