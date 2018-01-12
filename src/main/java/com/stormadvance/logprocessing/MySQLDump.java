@@ -60,16 +60,21 @@ public class MySQLDump {
 
 
 			// preparedStatements can use variables and are more efficient
-			String query = "INSERT INTO `testing` (`c1`, `c2`, `c3`) VALUES ('c1', 'c2', 'c3')";
+			String query = "INSERT INTO `testing` (`c1`, `c2`, `c3`) VALUES (?, ?, ?)";
         try {
             preparedStatement = con.prepareStatement(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        //preparedStatement.setString(1, tuple.getStringByField("c1"));
-			//preparedStatement.setString(2, tuple.getStringByField("c2"));
-			//preparedStatement.setString(3, tuple.getStringByField("c3"));
+        try {
+            preparedStatement.setString(1, tuple.getStringByField("c1"));
+            preparedStatement.setString(2, tuple.getStringByField("c2"));
+            preparedStatement.setString(3, tuple.getStringByField("c3"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
 			
 			// Insert record
