@@ -69,8 +69,8 @@ public class MySQLDump {
 
         try {
             preparedStatement.setString(1, tuple.getStringByField("c1"));
-            preparedStatement.setString(2, tuple.getStringByField("c2"));
-            preparedStatement.setString(3, tuple.getStringByField("c3"));
+            preparedStatement.setString(2, String.valueOf(tuple.getLong(1)));
+            preparedStatement.setString(3, String.valueOf(System.currentTimeMillis()-tuple.getLong(1)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
